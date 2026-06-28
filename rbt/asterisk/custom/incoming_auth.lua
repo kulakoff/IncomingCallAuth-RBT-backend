@@ -1,5 +1,6 @@
 function handleIncomingCall(context, extension)
-    app.Answer()
+    app.Ringing()
+    app.Wait(1)
 
     local callerId = channel.CALLERID("num"):get()
     if callerId == nil or callerId == "" or not callerId:match("%d") then
@@ -14,7 +15,7 @@ function handleIncomingCall(context, extension)
     local redisKey = "incoming_call_" .. lastFiveDigits
 
     redis:setex(redisKey, 300, os.time())
-    app.Hangup()
+    app.Busy()
 end
 
 extensions["from-provider"] = {

@@ -31,7 +31,7 @@
 В шаблоне конфигурации нужно заменить тестовые значения на реальные данные провайдера:
 
 - `SIP_USER` - логин SIP-аккаунта
-- `CLIENT_PASS` - пароль SIP-аккаунта
+- `SIP_USER_PASS` - пароль SIP-аккаунта
 - `SIP_SERVER_ADDRESS` - адрес SIP-сервера провайдера
 - `50605` - локальный UDP-порт Asterisk, при необходимости можно изменить
 
@@ -57,13 +57,13 @@ expiration=300
 auth_rejection_permanent=yes
 contact_user=SIP_USER
 server_uri=sip:SIP_SERVER_ADDRESS:5060
-client_uri=sip:SIP_USER@SIP_SERVER_ADDRES:5060
+client_uri=sip:SIP_USER@SIP_SERVER_ADDRESS:5060
 
 [provider-auth]
 type=auth
 auth_type=userpass
 username=SIP_USER
-password=CLIENT_PASS
+password=SIP_USER_PASS
 
 [provider-endpoint]
 type=endpoint
@@ -73,7 +73,7 @@ disallow=all
 allow=alaw,ulaw
 outbound_auth=provider-auth
 aors=provider-aor
-from_domain=SIP_SERVER_ADDRES
+from_domain=SIP_SERVER_ADDRESS
 from_user=SIP_USER
 sdp_owner=SIP_USER
 direct_media=no
@@ -85,12 +85,12 @@ timers=no
 
 [provider-aor]
 type=aor
-contact=sip:SIP_SERVER_ADDRES:5060
+contact=sip:SIP_SERVER_ADDRESS:5060
 
 [provider-identify]
 type=identify
 endpoint=provider-endpoint
-match=SIP_SERVER_ADDRES
+match=SIP_SERVER_ADDRESS
 ```
 
 Файл кастомизации:
